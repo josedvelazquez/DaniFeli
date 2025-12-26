@@ -2,7 +2,7 @@ const outputDiv = document.getElementById('output');
 const commands = [
     { cmd: 'init_celebration.exe', output: 'Iniciando secuencia de fiesta...' },
     { cmd: 'load_wishes --all', output: 'Cargando buenos deseos: [██████████] 100%' },
-    { cmd: 'echo "¡Feliz Cumpleaños!"', output: '¡FELIZ CUMPLEAÑOS!\n\nQue tengas un día lleno de éxitos, código limpio y cero bugs. \n¡Pásala increíble!' }
+    { cmd: 'echo "¡Feliz Cumpleaños Tonoto!"', output: '¡FELIZ CUMPLEAÑOS!\n\nQue tengas un día lleno de éxitos, código limpio y cero bugs. \n¡Pásala increíble!' }
 ];
 
 let cmdIndex = 0;
