@@ -1,0 +1,133 @@
+body {
+    background: radial-gradient(circle at bottom, #1a0b2e 0%, #000000 100%);
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 1;
+}
+
+.scene-scaler {
+    position: relative;
+    z-index: 10;
+    width: 800px;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.scene {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+}
+
+.year-container {
+    perspective: 500px;
+    transform-style: preserve-3d;
+    margin-bottom: 50px;
+}
+
+/* 3D Text Effect using layers */
+.year-3d {
+    font-size: 10rem;
+    font-weight: 900;
+    color: #fff;
+    position: relative;
+    transform-style: preserve-3d;
+    text-shadow: 
+        0 0 10px rgba(255,255,255,0.8),
+        0 0 20px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(to bottom, #fff 0%, #ffd700 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Volumetric layers */
+.year-3d::before, .year-3d::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    -webkit-text-fill-color: transparent; /* Override transparent fill */
+    color: rgba(255, 215, 0, 0.3);
+    z-index: -1;
+    transition: transform 0.1s;
+}
+
+.year-3d::before {
+    transform: translateZ(-20px);
+    text-shadow: 0 0 20px #ff00ff;
+}
+
+.year-3d::after {
+    transform: translateZ(-40px);
+    text-shadow: 0 0 40px #00ffff;
+}
+
+.message-glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 30px 60px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transform: translateZ(50px); /* Pop out */
+    animation: glow 3s infinite alternate;
+}
+
+.message-glass h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    margin: 0;
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.message-glass p {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    color: #ddd;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotateX(0deg); }
+    50% { transform: translateY(-20px) rotateX(5deg); }
+}
+
+@keyframes glow {
+    from { box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 0 rgba(255,255,255,0); }
+    to { box-shadow: 0 10px 50px rgba(255, 215, 0, 0.3), inset 0 0 20px rgba(255,255,255,0.1); }
+}
+
+/* Scaling */
+@media (max-width: 800px) {
+    .scene-scaler { transform: scale(0.8); }
+}
+@media (max-width: 600px) {
+    .scene-scaler { transform: scale(0.6); }
+    .year-3d { font-size: 8rem; }
+}
+@media (max-width: 450px) {
+    .scene-scaler { transform: scale(0.45); }
+    .message-glass { padding: 20px 30px; }
+}
