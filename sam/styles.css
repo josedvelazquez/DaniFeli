@@ -1,0 +1,207 @@
+body {
+    background-color: #5d4037;
+    /* Wood */
+    background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Special Elite', monospace;
+    overflow-x: hidden;
+}
+
+.desk {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.paper-scaler {
+    width: 600px;
+    height: 1000px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper {
+    background: #fdfbf7;
+    width: 500px;
+    height: 900px;
+    padding: 60px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    box-sizing: border-box;
+    transform: rotate(1deg);
+    background-image: url('https://www.transparenttextures.com/patterns/paper.png');
+}
+
+.paper::before {
+    content: '';
+    /* Watermark or stain */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(rgba(139, 69, 19, 0.05), transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.date-stamp {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    border: 2px solid #c0392b;
+    color: #c0392b;
+    padding: 5px 10px;
+    font-weight: bold;
+    transform: rotate(-15deg);
+    opacity: 0.8;
+    font-size: 1.2rem;
+}
+
+.content {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
+    position: relative;
+    z-index: 1;
+}
+
+/* Cursor effect handled in JS or CSS */
+.cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.15rem;
+    background: #333;
+    animation: blink 0.8s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+.signature {
+    margin-top: 50px;
+    text-align: right;
+    font-style: italic;
+    color: #555;
+    position: relative;
+    z-index: 1;
+}
+
+.polaroid-hint {
+    position: absolute;
+    bottom: 50px;
+    left: -50px;
+    transform: rotate(-10deg);
+    background: white;
+    padding: 10px 10px 30px 10px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+}
+
+.polaroid-hint img {
+    display: block;
+    width: 120px;
+    height: auto;
+    filter: sepia(0.5);
+}
+
+#typeBtn {
+    margin-top: 50px;
+    background: #3e2723;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Overlay Styles */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.full-polaroid {
+    background: white;
+    padding: 20px 20px 60px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transform: rotate(2deg);
+    max-width: 90%;
+    max-height: 85%;
+}
+
+.full-polaroid img {
+    max-width: 100%;
+    max-height: 600px;
+    display: block;
+}
+
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.close-btn:hover {
+    color: #bbb;
+}
+
+/* Scaling */
+@media (max-width: 650px) {
+    .paper-scaler {
+        transform: scale(0.8);
+        height: 650px;
+    }
+}
+
+@media (max-width: 500px) {
+    .paper-scaler {
+        transform: scale(0.6);
+        height: 500px;
+        margin-top: -80px;
+    }
+}
+
+@media (max-width: 380px) {
+    .paper-scaler {
+        transform: scale(0.48);
+        height: 400px;
+        margin-top: -120px;
+    }
+}
