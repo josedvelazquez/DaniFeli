@@ -9,19 +9,21 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Chomsky&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
     <style>
         @font-face {
             font-family: 'Chomsky';
             src: url('https://db.onlinewebfonts.com/t/209c737d26c117e3f813c93z84d3c330.eot');
-            /* Fallback or local needed ideally, using generic serif in CSS if fails */
+            /* Se necesita un fallback o local idealmente, usando serif genérico en CSS si falla */
         }
     </style>
 </head>
 
 <body>
+    <button id="downloadBtn" class="download-btn">Descargar Periodico</button>
     <div class="paper">
         <div class="meta-top">
-            <span>VOL. 35</span>
+            <span>VOL. 64</span>
             <span>EDICIÓN ESPECIAL</span>
             <span>GRATIS: SONRISAS</span>
         </div>
@@ -29,7 +31,8 @@
         <div class="date-line">
             <span>Diario Oficial del Festejo</span>
             <span>•</span>
-            <span>Jueves, 05 de Marzo del 2026</span> <!-- Dynamic date could be better but static for styling -->
+            <span>Jueves, 05 de Marzo del 2026</span>
+            <!-- La fecha dinámica podría ser mejor pero es estática para el estilo -->
             <span>•</span>
             <span>Precio: Un Abrazo</span>
         </div>
@@ -44,7 +47,6 @@
                 <p>Se reportan altos niveles de alegría, pasteles deliciosos y una lluvia de buenos deseos.</p>
             </div>
             <div class="col photo-col">
-                <!-- INSERT YOUR IMAGE HERE: Rename your photo to 'imagen.jpg' and place it in this folder -->
                 <img src="image.jpg" alt="Festejado" class="newspaper-photo">
                 <caption class="photo-caption">Fig. 1: El festejado siendo increible.</caption>
             </div>
@@ -54,8 +56,42 @@
             </div>
         </div>
     </div>
-</body>
+    <script>
+        document.getElementById('downloadBtn').addEventListener('click', function () {
+            const paper = document.querySelector('.paper');
+            const btn = this;
 
+            // Ocultar botón durante la captura
+            btn.style.opacity = '0';
+
+            // Esperar un momento para la actualización de la interfaz
+            setTimeout(() => {
+                htmlToImage.toPng(paper, {
+                    quality: 1.0,
+                    pixelRatio: 2, // Alta resolución
+                    backgroundColor: '#f4ecd8', // Color de fondo del papel
+                    style: {
+                        transform: 'scale(1)', // Neutralizar cualquier efecto de escala durante la captura
+                        margin: '0',
+                        left: '0',
+                        top: '0'
+                    }
+                })
+                    .then(function (dataUrl) {
+                        const link = document.createElement('a');
+                        link.download = 'nena-times-periodico.png';
+                        link.href = dataUrl;
+                        link.click();
+                        btn.style.opacity = '1';
+                    })
+                    .catch(function (error) {
+                        console.error('Error al generar la imagen:', error);
+                        btn.style.opacity = '1';
+                    });
+            }, 100);
+        });
+    </script>
+</body>
 
 
 </html>
